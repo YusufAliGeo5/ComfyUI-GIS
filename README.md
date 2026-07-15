@@ -24,26 +24,26 @@ The project will explore workflows combining:
 
 ## Initial Roadmap
  
- Create the custom-node package structure
- Register the first node in ComfyUI
- Load vector data with GeoPandas
- Create a vector buffer
- Export the result to GeoPackage
- Add CRS validation
- Add vector preview generation
- Add raster-loading nodes
- Add zonal statistics
- Explore GeoAI segmentation workflows
- Explore optional ArcPy integration
+- Create the custom-node package structure
+- Register the first node in ComfyUI
+- Load vector data with GeoPandas
+- Create a vector buffer
+- Export the result to GeoPackage
+- Add CRS validation
+- Add vector preview generation
+- Add raster-loading nodes
+- Add zonal statistics
+- Explore GeoAI segmentation workflows
+- Explore optional ArcPy integration
 
 ## Project Principles
 
-GIS data should retain its CRS and spatial metadata.
-Spatially invalid operations should produce clear errors.
-Core functionality should use open-source GIS libraries.
-ArcPy integration should remain optional.
-GIS processing logic should remain separate from ComfyUI-specific code.
-Workflows should be reproducible and inspectable.
+- GIS data should retain its CRS and spatial metadata.
+- Spatially invalid operations should produce clear errors.
+- Core functionality should use open-source GIS libraries.
+- ArcPy integration should remain optional.
+- GIS processing logic should remain separate from ComfyUI-specific code.
+- Workflows should be reproducible and inspectable.
 
 ## Installation
 
