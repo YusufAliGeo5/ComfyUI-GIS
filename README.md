@@ -1,6 +1,6 @@
 # ComfyUI-GIS
 
-Visual geospatial processing and GeoAI nodes for ComfyUI. Build reproducible GIS workflows for raster, vector, remote sensing, spatial analysis, and machine learning.
+Visual geospatial processing and GeoAI nodes for [ComfyUI](https://comfy.org/). Build custom reproducible GIS workflows for raster, vector, remote sensing, spatial analysis, and machine learning.
 
 ![ComfyUI-GIS teaser](./ComfyUI-GIS-Banner.png)
 
@@ -23,6 +23,7 @@ The project will explore workflows combining:
 - optional integration with ArcPy and other GIS engines
 
 ## Initial Roadmap
+ 
  Create the custom-node package structure
  Register the first node in ComfyUI
  Load vector data with GeoPandas
