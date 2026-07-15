@@ -35,7 +35,7 @@ The project will explore workflows combining:
  Explore GeoAI segmentation workflows
  Explore optional ArcPy integration
 
-Project Principles
+## Project Principles
 
 GIS data should retain its CRS and spatial metadata.
 Spatially invalid operations should produce clear errors.
@@ -43,28 +43,28 @@ Core functionality should use open-source GIS libraries.
 ArcPy integration should remain optional.
 GIS processing logic should remain separate from ComfyUI-specific code.
 Workflows should be reproducible and inspectable.
-Installation
+
+## Installation
 
 Installation instructions will be added after the first working node is available.
 
-Author
+## Author
 
 ComfyUI-GIS was conceived and created by Yusuf Ali.
 
 GitHub: @YusufAliGeo5
 
-Attribution
+## Attribution
 
 Copyright © 2026 Yusuf Ali.
 
 Redistributions and modified versions must preserve the applicable copyright, license, and author-attribution notices.
 
-Disclaimer
+## Disclaimer
 
 ComfyUI-GIS is an independent community project. It is not affiliated with or endorsed by Comfy Org, Esri, Meta, or other third-party software and model providers referenced by the project.
-
 Third-party software, models, APIs, and datasets remain subject to their respective licenses and terms.
 
-License
+## License
 
 Licensed under the GNU General Public License v3.0. See LICENSE.
