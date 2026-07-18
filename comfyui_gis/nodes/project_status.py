@@ -1,9 +1,11 @@
 class ComfyUIGISProjectStatus:
-    """Simple output node used to verify that ComfyUI-GIS executes."""
+    """Output node used to verify that ComfyUI-GIS executes correctly."""
 
     @classmethod
     def INPUT_TYPES(cls):
-        return {"required": {}}
+        return {
+            "required": {}
+        }
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("status",)
@@ -11,10 +13,16 @@ class ComfyUIGISProjectStatus:
     FUNCTION = "run"
     CATEGORY = "GIS/Development"
 
-    # This makes the node a valid endpoint for workflow execution.
+    # Marks this node as a workflow endpoint.
     OUTPUT_NODE = True
 
     def run(self):
         message = "ComfyUI-GIS executed successfully."
         print(f"[ComfyUI-GIS] {message}")
-        return (message,)
+
+        return {
+            "ui": {
+                "text": [message]
+            },
+            "result": (message,)
+        }
