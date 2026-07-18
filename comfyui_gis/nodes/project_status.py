@@ -1,30 +1,20 @@
-"""Minimal validation node used to confirm that ComfyUI-GIS loads correctly."""
-
-
 class ComfyUIGISProjectStatus:
-    """Return a simple status message without requiring GIS dependencies."""
+    """Simple output node used to verify that ComfyUI-GIS executes."""
 
     @classmethod
     def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "message": (
-                    "STRING",
-                    {
-                        "default": "ComfyUI-GIS is installed and ready for development.",
-                        "multiline": True,
-                    },
-                )
-            }
-        }
+        return {"required": {}}
 
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("status",)
-    FUNCTION = "run"
-    CATEGORY = "ComfyUI-GIS/Development"
-    DESCRIPTION = "Confirms that the ComfyUI-GIS custom-node package loads successfully."
 
-    def run(self, message: str):
-        text = message.strip() or "ComfyUI-GIS loaded successfully."
-        print(f"[ComfyUI-GIS] {text}")
-        return (text,)
+    FUNCTION = "run"
+    CATEGORY = "GIS/Development"
+
+    # This makes the node a valid endpoint for workflow execution.
+    OUTPUT_NODE = True
+
+    def run(self):
+        message = "ComfyUI-GIS executed successfully."
+        print(f"[ComfyUI-GIS] {message}")
+        return (message,)
