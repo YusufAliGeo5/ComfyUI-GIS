@@ -26,7 +26,7 @@ The project will explore workflows combining:
 
 - [x] Create the custom-node package structure
 - [x] Add a minimal project-status node for installation testing
-- [ ] Register and test the first GIS processing node in ComfyUI
+- [x] Register and test the first GIS processing node in ComfyUI
 - [ ] Load vector data with GeoPandas
 - [ ] Create a vector buffer
 - [ ] Export the result to GeoPackage
