@@ -1,0 +1,2 @@
+# No external dependencies are required for the initial project-status node.
+# GIS dependencies will be added incrementally with the first functional nodes.

@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-gis"
+version = "0.0.1"
+description = "Visual geospatial processing and GeoAI nodes for ComfyUI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-only" }
+authors = [
+  { name = "Yusuf Ali" }
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/YusufAliGeo5/ComfyUI-GIS"
+Issues = "https://github.com/YusufAliGeo5/ComfyUI-GIS/issues"
