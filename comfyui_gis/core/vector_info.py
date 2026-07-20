@@ -3,8 +3,95 @@
 from __future__ import annotations
 
 from pathlib import Path
+import hashlib
 import sys
-from typing import Any
+from typing import Any, Iterable
+
+
+def _dataset_component_paths(path: Path) -> list[Path]:
+    """Return files whose timestamps should invalidate a cached vector read."""
+
+    if path.is_dir():
+        # Directory-backed formats such as FileGDB may contain many files.
+        # Limit the scan to keep cache fingerprinting fast and deterministic.
+        components = [item for item in path.rglob("*") if item.is_file()]
+        return sorted(components, key=lambda item: str(item).casefold())[:2048]
+
+    if path.suffix.casefold() != ".shp":
+        return [path]
+
+    components: list[Path] = []
+    for suffix in (
+        ".shp",
+        ".shx",
+        ".dbf",
+        ".prj",
+        ".cpg",
+        ".qix",
+        ".sbn",
+        ".sbx",
+        ".aih",
+        ".ain",
+        ".ixs",
+        ".mxs",
+        ".atx",
+    ):
+        candidate = path.with_suffix(suffix)
+        if candidate.exists():
+            components.append(candidate)
+
+    metadata_xml = Path(str(path) + ".xml")
+    if metadata_xml.exists():
+        components.append(metadata_xml)
+
+    return sorted(set(components), key=lambda item: str(item).casefold()) or [path]
+
+
+def vector_dataset_fingerprint(
+    vector_path: str,
+    layer: str = "",
+    extra: Iterable[Any] = (),
+) -> str:
+    """Create a lightweight cache fingerprint for a local vector dataset.
+
+    ComfyUI caches node outputs. Including file size and modification time means
+    externally edited GIS files are re-read even when the path widget is unchanged.
+    """
+
+    cleaned = vector_path.strip().strip('"').strip("'")
+    digest = hashlib.sha256()
+    digest.update(cleaned.encode("utf-8", errors="replace"))
+    digest.update(layer.strip().encode("utf-8", errors="replace"))
+    digest.update(repr(tuple(extra)).encode("utf-8", errors="replace"))
+
+    if not cleaned:
+        return digest.hexdigest()
+
+    path = Path(cleaned).expanduser()
+    if not path.exists():
+        digest.update(b"missing")
+        return digest.hexdigest()
+
+    try:
+        resolved = path.resolve()
+    except OSError:
+        resolved = path
+
+    digest.update(str(resolved).encode("utf-8", errors="replace"))
+    for component in _dataset_component_paths(resolved):
+        try:
+            stat = component.stat()
+        except OSError:
+            continue
+        try:
+            relative = component.relative_to(resolved if resolved.is_dir() else resolved.parent)
+        except ValueError:
+            relative = component
+        digest.update(str(relative).encode("utf-8", errors="replace"))
+        digest.update(str(stat.st_size).encode("ascii"))
+        digest.update(str(stat.st_mtime_ns).encode("ascii"))
+
+    return digest.hexdigest()
 
 
 def _normalise_path(raw_path: str) -> Path:

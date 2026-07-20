@@ -1,6 +1,6 @@
 [project]
 name = "comfyui-gis"
-version = "0.0.1"
+version = "0.0.2"
 description = "Visual geospatial processing and GeoAI nodes for ComfyUI."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -8,7 +8,11 @@ license = { text = "GPL-3.0-only" }
 authors = [
   { name = "Yusuf Ali" }
 ]
-dependencies = []
+dependencies = [
+  "pyogrio>=0.7",
+  "geopandas>=0.14",
+  "matplotlib>=3.7",
+]
 
 [project.urls]
 Repository = "https://github.com/YusufAliGeo5/ComfyUI-GIS"

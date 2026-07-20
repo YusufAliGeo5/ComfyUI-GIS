@@ -1,2 +1,4 @@
-# Milestone 3: vector dataset metadata inspection
+# Vector inspection and static preview
 pyogrio>=0.7
+geopandas>=0.14
+matplotlib>=3.7

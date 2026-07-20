@@ -1,6 +1,6 @@
 """ComfyUI node for inspecting vector dataset metadata."""
 
-from ..core.vector_info import inspect_vector_dataset
+from ..core.vector_info import inspect_vector_dataset, vector_dataset_fingerprint
 
 
 class ComfyUIGISInspectVector:
@@ -43,6 +43,19 @@ class ComfyUIGISInspectVector:
         "CRS, bounds, and attribute fields. The input dataset is not modified."
     )
     SEARCH_ALIASES = ["vector info", "inspect shapefile", "inspect geopackage"]
+
+    @classmethod
+    def IS_CHANGED(
+        cls,
+        vector_path: str,
+        layer: str = "",
+        force_exact_metadata: bool = False,
+    ):
+        return vector_dataset_fingerprint(
+            vector_path=vector_path,
+            layer=layer,
+            extra=(force_exact_metadata,),
+        )
 
     def inspect(
         self,
